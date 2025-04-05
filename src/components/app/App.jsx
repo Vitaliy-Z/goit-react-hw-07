@@ -7,16 +7,11 @@ import SearchBox from "../searchBox/SearchBox";
 import ContactList from "../contactList/ContactList";
 // It's project was created by Vitalii Zvieriev
 import "./App.css";
-import {
-  selectContact,
-  selectErorr,
-  selectLoading
-} from "../../redux/contactsSlice";
+import { selectErorr, selectLoading } from "../../redux/contactsSlice";
 
 function App() {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectErorr);
-  const contacts = useSelector(selectContact);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -37,7 +32,7 @@ function App() {
       <SearchBox />
       {loading && <PropagateLoader color="red" size={17} />}
       {error && <p>Error...</p>}
-      {contacts.length > 0 && <ContactList />}
+      {!loading && !error && <ContactList />}
     </>
   );
 }
